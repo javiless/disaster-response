@@ -41,8 +41,6 @@ def index():
 
     # extract data needed for visuals
 
-    # TODO: Below is an example - modify to extract data for your own visuals
-
     # VISUAL 1 ---------------------------------------------------------------
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
@@ -53,7 +51,7 @@ def index():
     categ_names = list(categ_counts.index) #get names
 
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
+
     graphs = [
         # VISUAL 1 -----------------------------------------------------------
         {

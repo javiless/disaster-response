@@ -3,7 +3,7 @@
 1. [Installation](#installation)
 2. [Project Motivation](#motivation)
 3. [File Descriptions](#files)
-4. [Results](#results)
+4. [Execution Instructions](#execution)
 5. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## Installation <a name="installation"></a>
@@ -12,22 +12,43 @@ There should be no necessary libraries to run the code here beyond the Anaconda 
 
 ## Project Motivation<a name="motivation"></a>
 
-For this project, I was interested in using the No-show Appointments dataset available in [Kaggle](https://www.kaggle.com/joniarroba/noshowappointments) with the objective of proposing actions that might increase the appointment attendance rate. These action proposals would come from the result of analysing the dataset in order to answer the following questions:
-
-1. Does the time between Scheduled and Appointment dates have an effect on the attendance rate?
-2. How does patients' age impact on absenteeism?
-3. Is the patients' location an important aspect to consider regarding the attendance?
+For this project, I was interested in deploying a web app that successfully classifies messages introduced by the users that are in an emergency situation. For this purpose I built a Machine Learning (ML) pipeline that trains a ML model based on a training dataset of more than 26,000 emergency messages.
 
 ## File Descriptions <a name="files"></a>
 
-There is one notebook available here to showcase work related to the above questions.  The notebook includes the necessary data wrangling (gathering, assessing and cleaning) and data analysis steps for answering above questions.  Markdown cells were used to assist in walking through the thought process for individual steps.
+- app
+| - template
+| |- master.html  # main page of web app
+| |- go.html  # classification result page of web app
+|- run.py  # Flask file that runs app
 
-The dataset in CSV format is also available in the repository.
+- data
+|- disaster_categories.csv  # training dataset with the messages
+|- disaster_messages.csv  # training dataset with the categories of the messages
+|- process_data.py  # script that generate the cleaned database based on both csv files.
 
-## Results<a name="results"></a>
+- models
+|- train_classifier.py # script that loads data from database, tokenizes it, builds the ML model, evaluates it and saves it as a pkl file. 
 
-The main findings of the code can be found at the post available [here](https://medium.com/@javiles.garcia/doctors-keep-getting-abandoned-what-can-we-do-for-them-813957eec21e).
+- README.md
+
+## Execution Instructions<a name="execution"></a>
+
+1. Download all files to your local machine.
+
+2. Run the following commands in the project's root directory to set up your database and model.
+
+    2.1 To run ETL pipeline that cleans data and stores in database
+        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/INSERT_YOUR_NAME_DB.db`
+        
+    2.2 To run ML pipeline that trains classifier and saves
+        `python models/train_classifier.py data/INSERT_YOUR_NAME_DB.db models/INSERT_YOUR_CLASSIFIER_NAME.pkl`
+
+3. Run the following command in the "app" directory to run your web app.
+    `python run.py`
+
+3. Go to web URL shown in the terminal after "Running on ...", and enter a message to see how it is classified for each of the disaster response categories.
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
-Must give credit to [JoniHoppen](https://www.kaggle.com/joniarroba) for the data.  You can find the Licensing for the data and other descriptive information at the Kaggle link available [here](https://www.kaggle.com/joniarroba/noshowappointments).  Otherwise, feel free to use the code here as you would like! 
+Must give credit to [Figure Eight](https://appen.com/) and Udacity (https://www.udacity.com/) for providing the datasets, means and motivation for carrying out this project.

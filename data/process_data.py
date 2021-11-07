@@ -3,21 +3,37 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
-    
+    """Returns a dataframe after merging the input files.
+
+    Parameters:
+        messages_filepath (str): path to messages file
+        categories_filepath (str): path to categories file
+
+    Returns:
+        df (dataframe): merged dataframe
+    """
+
     #load datasets
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
 
     # merge datasets
     df = messages.merge(categories,how='inner',left_on='id',right_on='id')
-    
+
     # merged dataset is returned
     return df
 
 def clean_data(df):
-    
+    """Dataframe with data is cleaned.
+
+    Parameters:
+        df (dataframe): dataframe to clean
+
+    Returns:
+        df (dataframe): cleaned dataframe
+    """
     #1) Split `categories` into separate category columns. -------------------------
-    
+
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(';',expand=True)
 
@@ -26,11 +42,11 @@ def clean_data(df):
 
     # extract a list of new column names for categories.
     category_colnames = row.apply(lambda x: x[:-2])
-    
+
     # rename the columns of `categories`
     categories.columns = category_colnames
-    
-    
+
+
     #2) Convert category values to just numbers 0 or 1. ------------------------------
     for column in categories:
         # set each value to be the last character of the string
@@ -38,30 +54,39 @@ def clean_data(df):
 
         # convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])
-    
-    
+
+
     #3) Replace categories column in df with new category columns.---------------------
-    
+
     # drop the original categories column from `df`
     df.drop('categories',axis=1,inplace=True)
-    
+
     # concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories],axis=1)
-    
-    
+
+
     #4) Remove duplicates.--------------------------------------------------------------
-    
+
     # drop duplicates
     df.drop_duplicates(inplace=True)
-    
-    
+
+
     #6) cleaned dataset is returned
     print('     Dataframe Dimensions:',df.shape)
     return df
-    
-    
+
+
 def save_data(df, database_filename):
-    
+    """Dataframe is stored in a SQLITE database.
+
+    Parameters:
+        df (dataframe): dataframe to save
+        database_filename (str): database file name
+
+    Returns:
+        none
+    """
+
     # build database path string
     database_filename_str = 'sqlite:///'+database_filename
     # create SQLite engine
@@ -71,10 +96,10 @@ def save_data(df, database_filename):
     last_occ = database_filename_str.rfind('/')+1
     table_name = database_filename_str[last_occ:-3]
     print('     Table: ',table_name)
-    
+
     # export dataframe to SQLite engine
     df.to_sql(table_name, engine, index=False, if_exists='replace')
-    
+
 
 def main():
     if len(sys.argv) == 4:
@@ -87,12 +112,12 @@ def main():
 
         print('Cleaning data...')
         df = clean_data(df)
-        
+
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
         save_data(df, database_filepath)
-        
+
         print('Cleaned data saved to database!')
-    
+
     else:
         print('Please provide the filepaths of the messages and categories '\
               'datasets as the first and second argument respectively, as '\

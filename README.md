@@ -32,7 +32,7 @@ b) data folder
  
 
 c) models folder
-- train_classifier.py # script that loads data from database, tokenizes it, builds the ML model, evaluates it and saves it as a pkl file. 
+- train_classifier.py # script that loads data from database, tokenizes it, builds the ML model, evaluates it and saves it as a pickle file. 
 
 
 d) README.md
@@ -44,17 +44,18 @@ d) README.md
 
 2. Run the following commands in the project's root directory to set up your database and model.
 
-    2.1 To run ETL pipeline that cleans data and stores in database
+    2.1 Run ETL pipeline that cleans data and stores in database:
     
         >python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/INSERT_YOUR_NAME_DB.db
         
         
-    2.2 To run ML pipeline that trains classifier and saves
+    2.2 Run ML pipeline that trains classifier and saves it:
         
         >python models/train_classifier.py data/INSERT_YOUR_NAME_DB.db models/INSERT_YOUR_CLASSIFIER_NAME.pkl
 
-3. Run the following command in the "app" directory to run your web app.
-    `python run.py`
+3. Run the following command in the "app" directory to run your web app:
+       
+       >python run.py
 
 3. Go to web URL shown in the terminal after "Running on ...", and enter a message to see how it is classified for each of the disaster response categories.
 

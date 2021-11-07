@@ -10,27 +10,33 @@
 
 There should be no necessary libraries to run the code here beyond the Anaconda distribution of Python.  The code should run with no issues using Python versions 3.*.
 
+
 ## Project Motivation<a name="motivation"></a>
 
 For this project, I was interested in deploying a web app that successfully classifies messages introduced by the users that are in an emergency situation. For this purpose I built a Machine Learning (ML) pipeline that trains a ML model based on a training dataset of more than 26,000 emergency messages.
 
+
 ## File Descriptions <a name="files"></a>
 
-- app
- - template
-| |- master.html  # main page of web app
-| |- go.html  # classification result page of web app
-|- run.py  # Flask file that runs app
+a) app folder
+ - template folder
+   - master.html  # main page of web app
+   - go.html  # classification result page of web app
+ - run.py  # Flask file that runs app
+ 
 
-- data
-|- disaster_categories.csv  # training dataset with the messages
-|- disaster_messages.csv  # training dataset with the categories of the messages
-|- process_data.py  # script that generate the cleaned database based on both csv files.
+b) data folder
+ - disaster_categories.csv  # training dataset with the messages
+ - disaster_messages.csv  # training dataset with the categories of the messages
+ - process_data.py  # script that generate the cleaned database based on both csv files.
+ 
 
-- models
-|- train_classifier.py # script that loads data from database, tokenizes it, builds the ML model, evaluates it and saves it as a pkl file. 
+c) models folder
+- train_classifier.py # script that loads data from database, tokenizes it, builds the ML model, evaluates it and saves it as a pkl file. 
 
-- README.md
+
+d) README.md
+
 
 ## Execution Instructions<a name="execution"></a>
 
@@ -52,6 +58,7 @@ For this project, I was interested in deploying a web app that successfully clas
 
 3. Go to web URL shown in the terminal after "Running on ...", and enter a message to see how it is classified for each of the disaster response categories.
 
+
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
-Must give credit to [Figure Eight](https://appen.com/) and Udacity (https://www.udacity.com/) for providing the datasets, means and motivation for carrying out this project.
+Must give credit to [Figure Eight](https://appen.com/) and [Udacity](https://www.udacity.com/) for providing the datasets, means and motivation for carrying out this project.

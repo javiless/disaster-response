@@ -17,7 +17,7 @@ For this project, I was interested in deploying a web app that successfully clas
 ## File Descriptions <a name="files"></a>
 
 - app
-| - template
+ - template
 | |- master.html  # main page of web app
 | |- go.html  # classification result page of web app
 |- run.py  # Flask file that runs app
@@ -40,12 +40,12 @@ For this project, I was interested in deploying a web app that successfully clas
 
     2.1 To run ETL pipeline that cleans data and stores in database
     
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/INSERT_YOUR_NAME_DB.db`
+        >python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/INSERT_YOUR_NAME_DB.db
         
         
     2.2 To run ML pipeline that trains classifier and saves
         
-        `python models/train_classifier.py data/INSERT_YOUR_NAME_DB.db models/INSERT_YOUR_CLASSIFIER_NAME.pkl`
+        >python models/train_classifier.py data/INSERT_YOUR_NAME_DB.db models/INSERT_YOUR_CLASSIFIER_NAME.pkl
 
 3. Run the following command in the "app" directory to run your web app.
     `python run.py`
